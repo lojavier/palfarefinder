@@ -1,0 +1,54 @@
+// QPX Express API . trips
+
+// Instance Methods
+
+// search(body=*)
+// Returns a list of flights.
+// Method Details
+
+// search(body=*)
+// Returns a list of flights.
+
+// Args:
+//   body: object, The request body. (required)
+//     The object takes the form of:
+
+{ // A QPX Express search request.
+    "request": { // A QPX Express search request, which will yield one or more solutions. // A QPX Express search request. Required values are at least one adult or senior passenger, an origin, a destination, and a date.
+      "passengers": { // The number and type of passengers. Unfortunately the definition of an infant, child, adult, and senior citizen varies across carriers and reservation systems. // Counts for each passenger type in the request.
+        "kind": "qpxexpress#passengerCounts", // Identifies this as a passenger count object, representing the number of passengers. Value: the fixed string qpxexpress#passengerCounts.
+        "infantInLapCount": 0, // The number of passengers that are infants travelling in the lap of an adult.
+        "seniorCount": 0, // The number of passengers that are senior citizens.
+        "infantInSeatCount": 0, // The number of passengers that are infants each assigned a seat.
+        "childCount": 0, // The number of passengers that are children.
+        "adultCount": 1, // The number of passengers that are adults.
+      },
+      "slice": [ // The slices that make up the itinerary of this trip. A slice represents a traveler's intent, the portion of a low-fare search corresponding to a traveler's request to get between two points. One-way journeys are generally expressed using one slice, round-trips using two. An example of a one slice trip with three segments might be BOS-SYD, SYD-LAX, LAX-BOS if the traveler only stopped in SYD and LAX just long enough to change planes.
+        { // Criteria a desired slice must satisfy.
+          "origin": "A String", // Airport or city IATA designator of the origin.
+          "kind": "qpxexpress#sliceInput", // Identifies this as a slice input object, representing the criteria a desired slice must satisfy. Value: the fixed string qpxexpress#sliceInput.
+          "alliance": "A String", // Slices with only the carriers in this alliance should be returned; do not use this field with permittedCarrier. Allowed values are ONEWORLD, SKYTEAM, and STAR.
+          "date": "A String", // Departure date in YYYY-MM-DD format.
+          "destination": "A String", // Airport or city IATA designator of the destination.
+          "maxStops": 2, // The maximum number of stops you are willing to accept in this slice.
+          "permittedDepartureTime": { // Two times in a single day defining a time range. // Slices must depart in this time of day range, local to the point of departure.
+            "earliestTime": "A String", // The earliest time of day in HH:MM format.
+            "kind": "qpxexpress#timeOfDayRange", // Identifies this as a time of day range object, representing two times in a single day defining a time range. Value: the fixed string qpxexpress#timeOfDayRange.
+            "latestTime": "A String", // The latest time of day in HH:MM format.
+          },
+          "permittedCarrier": [ // A list of 2-letter IATA airline designators. Slices with only these carriers should be returned.
+            "A String",
+          ],
+          "maxConnectionDuration": 42, // The longest connection between two legs, in minutes, you are willing to accept.
+          "preferredCabin": "A String", // Prefer solutions that book in this cabin for this slice. Allowed values are COACH, PREMIUM_COACH, BUSINESS, and FIRST.
+          "prohibitedCarrier": [ // A list of 2-letter IATA airline designators. Exclude slices that use these carriers.
+            "A String",
+          ],
+        },
+      ],
+      "saleCountry": "A String", // IATA country code representing the point of sale. This determines the "equivalent amount paid" currency for the ticket.
+      "maxPrice": "A String", // Do not return solutions that cost more than this price. The alphabetical part of the price is in ISO 4217. The format, in regex, is [A-Z]{3}\d+(\.\d+)? Example: $102.07
+      "solutions": 42, // The number of solutions to return, maximum 500.
+      "refundable": True or False, // Return only solutions with refundable fares.
+    },
+  }

@@ -1,0 +1,19 @@
+{
+    "request": {
+        "passengers": {
+            "adultCount": 1
+        }, 
+        "slice": [
+            {
+                "date": "2016-10-28", 
+                "destination": "MNL", 
+                "origin": "SFO"
+            }, 
+            {
+                "date": "2016-11-13", 
+                "destination": "SFO", 
+                "origin": "MNL"
+            }
+        ]
+    }
+}
