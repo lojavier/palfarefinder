@@ -57,7 +57,7 @@ request = {
 	}
 }
 request = json.dumps(request, sort_keys=True, indent=4)
-print request
+# print request
 
 with open(requestJson, "w") as f:
 	f.write(str(request))
@@ -81,18 +81,28 @@ print response.keys()
 kind = response["kind"]
 trips = response["trips"]
 print trips.keys()
-# print trips
 tripOption = trips["tripOption"]
+print json.dumps(tripOption[0], sort_keys=True, indent=4)
+print tripOption[0]["slice"][0]["segment"][0]["leg"][0]["departureTime"]
+# print tripOption[x]["slice"][0]["segment"]["leg"][0]["departureTime"]
+# for x in range(0,len(tripOption)):
+# 	print tripOption[x]["saleTotal"]
+# 	print tripOption[x]["slice"][0]["segment"]["leg"][0]["departureTime"]
+# print tripOption.keys()
 data = trips["data"]
 requestId = trips["requestId"]
-print tripOption.values()
-# print data.keys()
-# print data
+# print json.dumps(tripOption, sort_keys=True, indent=4)
+print data.keys()
 city = data["city"]
+# print city.keys()
 tax = data["tax"]
+# print tax.keys()
 airport = data["airport"]
+# print airport.keys()
 aircraft = data["aircraft"]
+# print aircraft.keys()
 carrier = data["carrier"]
+# print carrier.keys()
 
 # print city
 # print tax
