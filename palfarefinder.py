@@ -83,51 +83,79 @@ trips = response["trips"]
 print trips.keys()
 tripOption = trips["tripOption"]
 print json.dumps(tripOption[0], sort_keys=True, indent=4)
-print tripOption[0]["slice"][0]["segment"][0]["leg"][0]["departureTime"]
-# print tripOption[x]["slice"][0]["segment"]["leg"][0]["departureTime"]
-# for x in range(0,len(tripOption)):
-# 	print tripOption[x]["saleTotal"]
-# 	print tripOption[x]["slice"][0]["segment"]["leg"][0]["departureTime"]
-# print tripOption.keys()
+for x in range(0,len(tripOption)-1):
+# for x in range(0,1):
+	print "************************************************************************************"
+	saleTotal 		= tripOption[x]["saleTotal"].replace("USD","$")
+	print "Price: %s" % (saleTotal)
+
+	carrier 		= tripOption[x]["slice"][0]["segment"][0]["flight"]["carrier"]
+	number			= tripOption[x]["slice"][0]["segment"][0]["flight"]["number"]
+	origin 			= tripOption[x]["slice"][0]["segment"][0]["leg"][0]["origin"]
+	destination 	= tripOption[x]["slice"][0]["segment"][0]["leg"][0]["destination"]
+	departureTime24 = tripOption[x]["slice"][0]["segment"][0]["leg"][0]["departureTime"]
+	departureTime12 = datetime.datetime.strptime(departureTime24[:16], "%Y-%m-%dT%H:%M").strftime('%m-%d-%Y %I:%M%p')
+	arrivalTime24 	= tripOption[x]["slice"][0]["segment"][0]["leg"][0]["arrivalTime"]
+	arrivalTime12 = datetime.datetime.strptime(arrivalTime24[:16], "%Y-%m-%dT%H:%M").strftime('%m-%d-%Y %I:%M%p')
+	durationMinutes = tripOption[x]["slice"][0]["segment"][0]["leg"][0]["duration"]
+	duration 		= "%dH:%02dM" % (durationMinutes/60,durationMinutes%60)
+	print "%s - Flight %s" % (carrier,number)
+	print "%s [%s] -> [%s] %s / %s" % (departureTime12,origin,destination,arrivalTime12,duration)
+
+	try:
+		carrier 		= tripOption[x]["slice"][0]["segment"][1]["flight"]["carrier"]
+		number			= tripOption[x]["slice"][0]["segment"][1]["flight"]["number"]
+		origin 			= tripOption[x]["slice"][0]["segment"][1]["leg"][0]["origin"]
+		destination 	= tripOption[x]["slice"][0]["segment"][1]["leg"][0]["destination"]
+		departureTime24 = tripOption[x]["slice"][0]["segment"][1]["leg"][0]["departureTime"]
+		departureTime12 = datetime.datetime.strptime(departureTime24[:16], "%Y-%m-%dT%H:%M").strftime('%m-%d-%Y %I:%M%p')
+		arrivalTime24 	= tripOption[x]["slice"][0]["segment"][1]["leg"][0]["arrivalTime"]
+		arrivalTime12 = datetime.datetime.strptime(arrivalTime24[:16], "%Y-%m-%dT%H:%M").strftime('%m-%d-%Y %I:%M%p')
+		durationMinutes = tripOption[x]["slice"][0]["segment"][1]["leg"][0]["duration"]
+		duration 		= "%dH:%02dM" % (durationMinutes/60,durationMinutes%60)
+		print "%s - Flight %s" % (carrier,number)
+		print "%s [%s] -> [%s] %s / %s" % (departureTime12,origin,destination,arrivalTime12,duration)
+	except:
+		print ""
+	print ""
+
+	carrier 		= tripOption[x]["slice"][1]["segment"][0]["flight"]["carrier"]
+	number			= tripOption[x]["slice"][1]["segment"][0]["flight"]["number"]
+	origin 			= tripOption[x]["slice"][1]["segment"][0]["leg"][0]["origin"]
+	destination 	= tripOption[x]["slice"][1]["segment"][0]["leg"][0]["destination"]
+	departureTime24 = tripOption[x]["slice"][1]["segment"][0]["leg"][0]["departureTime"]
+	departureTime12 = datetime.datetime.strptime(departureTime24[:16], "%Y-%m-%dT%H:%M").strftime('%m-%d-%Y %I:%M%p')
+	arrivalTime24 	= tripOption[x]["slice"][1]["segment"][0]["leg"][0]["arrivalTime"]
+	arrivalTime12 = datetime.datetime.strptime(arrivalTime24[:16], "%Y-%m-%dT%H:%M").strftime('%m-%d-%Y %I:%M%p')
+	durationMinutes = tripOption[x]["slice"][1]["segment"][0]["leg"][0]["duration"]
+	duration 		= "%dH:%02dM" % (durationMinutes/60,durationMinutes%60)
+	print "%s - Flight %s" % (carrier,number)
+	print "%s [%s] -> [%s] %s / %s" % (departureTime12,origin,destination,arrivalTime12,duration)
+
+	try:
+		carrier 		= tripOption[x]["slice"][1]["segment"][1]["flight"]["carrier"]
+		number			= tripOption[x]["slice"][1]["segment"][1]["flight"]["number"]
+		origin 			= tripOption[x]["slice"][1]["segment"][1]["leg"][0]["origin"]
+		destination 	= tripOption[x]["slice"][1]["segment"][1]["leg"][0]["destination"]
+		departureTime24 = tripOption[x]["slice"][1]["segment"][1]["leg"][0]["departureTime"]
+		departureTime12 = datetime.datetime.strptime(departureTime24[:16], "%Y-%m-%dT%H:%M").strftime('%m-%d-%Y %I:%M%p')
+		arrivalTime24 	= tripOption[x]["slice"][1]["segment"][1]["leg"][0]["arrivalTime"]
+		arrivalTime12 = datetime.datetime.strptime(arrivalTime24[:16], "%Y-%m-%dT%H:%M").strftime('%m-%d-%Y %I:%M%p')
+		durationMinutes = tripOption[x]["slice"][1]["segment"][1]["leg"][0]["duration"]
+		duration 		= "%dH:%02dM" % (durationMinutes/60,durationMinutes%60)
+		print "%s - Flight %s" % (carrier,number)
+		print "%s [%s] -> [%s] %s / %s" % (departureTime12,origin,destination,arrivalTime12,duration)
+	except:
+		print ""
+	print "************************************************************************************"
+	print "####################################################################################"
+
+print ""
+
 data = trips["data"]
 requestId = trips["requestId"]
-# print json.dumps(tripOption, sort_keys=True, indent=4)
-print data.keys()
 city = data["city"]
-# print city.keys()
 tax = data["tax"]
-# print tax.keys()
 airport = data["airport"]
-# print airport.keys()
 aircraft = data["aircraft"]
-# print aircraft.keys()
 carrier = data["carrier"]
-# print carrier.keys()
-
-# print city
-# print tax
-# print airport
-# print aircraft
-# print carrier
-
-# # print tripOption
-# # print requestId
-# print data.keys()
-# for key,value in trips.items():
-# 	print key
-# print trips
-# for key in trips.keys():
-# 	print key
-# print trips.keys()
-
-# for x in trips.values():
-	# print x
-# for key1,value1 in response.items():
-# 	print key1
-	# print value1
-	# for key2,value2 in value1.items():
-	# 	print key2
-	# if "name" in key1:
-	# 	print "%s : %s" % (key1,value1)
-
-# print response["pricing"]
